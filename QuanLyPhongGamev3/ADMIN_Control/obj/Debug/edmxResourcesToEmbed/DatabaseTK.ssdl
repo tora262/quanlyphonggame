@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuanLyPhongGameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="HoaDon">
+    <Key>
+      <PropertyRef Name="MaHD" />
+    </Key>
+    <Property Name="MaHD" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TenTK" Type="varchar" MaxLength="100" />
+    <Property Name="Loai" Type="bit" />
+    <Property Name="GiaTri" Type="int" />
+    <Property Name="Ngay" Type="date" />
+    <Property Name="Gio" Type="time" Precision="7" />
+    <Property Name="ChiTiet" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="KhoHang">
+    <Key>
+      <PropertyRef Name="MaHang" />
+    </Key>
+    <Property Name="MaHang" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TenHang" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="GiaNhap" Type="int" />
+    <Property Name="GiaBan" Type="int" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="TenTk" />
+    </Key>
+    <Property Name="TenTk" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ChuTK" Type="nvarchar" MaxLength="100" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="10" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="SoDienThoai" Type="varchar" MaxLength="15" />
+    <Property Name="SoDuTaiKhoan" Type="int" />
+  </EntityType>
+  <Association Name="FK__HoaDon__TenTK__145C0A3F">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="TenTk" />
+      </Principal>
+      <Dependent Role="HoaDon">
+        <PropertyRef Name="TenTK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QuanLyPhongGameModelStoreContainer">
+    <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhoHang" EntityType="Self.KhoHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__HoaDon__TenTK__145C0A3F" Association="Self.FK__HoaDon__TenTK__145C0A3F">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="HoaDon" EntitySet="HoaDon" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
